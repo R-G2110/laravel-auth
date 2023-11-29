@@ -43,7 +43,7 @@ class ProjectController extends Controller
             'delivery_date' =>'required',
         ],[
             'name.required' => 'Devi inserire il nome del progetto',
-            'title.min' => 'Il nome del progetto deve avere almeno 3 caratteri',
+            'name.min' => 'Il nome del progetto deve avere almeno 3 caratteri',
             'start_date.required' => "Devi inserire la data d'inizio del progetto",
             'delivery_date.required' => "Devi inserire la data di scadenza del progetto",
         ]);
@@ -53,7 +53,7 @@ class ProjectController extends Controller
         $new_project["slug"] = Project::generateSlug($form_data["name"]);
         $new_project["status"] = 'in process';
         $new_project->save();
-        return redirect()->route('adminprojects.show', $new_project->id);
+        return redirect()->route('admin.projects.show', $new_project->id);
     }
 
     /**
@@ -85,9 +85,11 @@ class ProjectController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Project $project)
     {
-        //
+        $form_data = $request->all();
+        $project->update($form_data);
+        return redirect()->route('admin.projects.show', $project);
     }
 
     /**
@@ -96,8 +98,9 @@ class ProjectController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Project $project)
     {
-        //
+        $project->delete();
+        return redirect()->route('admin.projects.index')->with('deleted', "Il progetto '$project->name' è stato eliminato correttamente!");
     }
 }

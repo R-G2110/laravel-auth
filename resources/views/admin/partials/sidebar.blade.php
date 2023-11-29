@@ -5,7 +5,7 @@
                 <a href="{{ route('admin.home') }}">Dashboard</a>
             </li>
             <li>
-                <a href="#">Lista Poste</a>
+                <a href="{{ route('admin.projects.index') }}">Lista Progetti</a>
             </li>
         </ul>
     </nav>

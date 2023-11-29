@@ -16,7 +16,9 @@ class Project extends Model
         'price',
         'start_date',
         'delivery_date',
-        'status'
+        'status',
+        'description',
+        'steps'
     ];
 
     public static function generateSlug($string){

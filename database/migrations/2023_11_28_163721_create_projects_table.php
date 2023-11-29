@@ -20,6 +20,8 @@ return new class extends Migration
             $table->date('start_date');
             $table->date('delivery_date');
             $table->string('status')->default('in process');
+            $table->text('description')->nullable();
+            $table->text('steps')->nullable();
             $table->timestamps();
         });
     }

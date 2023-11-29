@@ -23,6 +23,8 @@ class FakerProjectsTableSeeder extends Seeder
             $new_project->start_date = $faker->dateTime();
             $new_project->delivery_date = $faker->dateTimeInInterval($new_project->start_date, '+3 month');
             $new_project->status = $faker->randomElement(['done','in process','failed' ]);
+            $new_project->description = $faker->paragraph();
+            $new_project->steps = '1. Creazione '.$faker->word().' - '.'2. Modifica '.$faker->word().' - '.'3. Gestione '.$faker->word();
             $new_project->save();
         }
 
