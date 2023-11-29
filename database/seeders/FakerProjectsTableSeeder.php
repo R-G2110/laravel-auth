@@ -1,0 +1,30 @@
+<?php
+
+namespace Database\Seeders;
+
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use Illuminate\Database\Seeder;
+use App\Models\Project;
+use Faker\Generator as Faker;
+
+class FakerProjectsTableSeeder extends Seeder
+{
+    /**
+     * Run the database seeds.
+     *
+     * @return void
+     */
+    public function run(Faker $faker)
+    {
+        for($i = 0; $i < 10; $i++){
+            $new_project = new Project();
+            $new_project->name = 'Progetto '.$faker->words(2, true);
+            $new_project->slug = Project::generateSlug($new_project->name);
+            $new_project->start_date = $faker->dateTime();
+            $new_project->delivery_date = $faker->dateTimeInInterval($new_project->start_date, '+3 month');
+            $new_project->status = $faker->randomElement(['done','in process','failed' ]);
+            $new_project->save();
+        }
+
+    }
+}
